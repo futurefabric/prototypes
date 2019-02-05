@@ -1,0 +1,79 @@
+body {
+  margin: 50px; }
+
+.svg-logotype .crispin,
+.svg-logotype .f,
+.svg-logotype .inn {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4px; }
+
+.svg-logotype .finn-i-dot {
+  fill: #006fb9;
+  opacity: 0; }
+
+.svg-logotype .crispin-i-dot {
+  fill: #e30613;
+  opacity: 0; }
+
+.svg-logotype .crispin {
+  stroke: #e30613; }
+
+.svg-logotype .f,
+.svg-logotype .inn {
+  stroke: #006fb9; }
+
+.svg-logotype .crispin {
+  stroke-dasharray: 810;
+  stroke-dashoffset: 810;
+  animation: draw-crispin 2.5s ease-out forwards;
+  animation-delay: 0.6s; }
+
+.svg-logotype .crispin-i-dot.first {
+  animation: show-i 0.1s linear forwards;
+  animation-delay: 3.1s; }
+
+.svg-logotype .crispin-i-dot.second {
+  animation: show-i 0.1s linear forwards;
+  animation-delay: 3.2s; }
+
+.svg-logotype .f {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: draw-f 0.6s linear forwards;
+  animation-delay: 3.5s; }
+
+.svg-logotype .inn {
+  stroke-dasharray: 332;
+  stroke-dashoffset: 332;
+  animation: draw-inn 1.4s ease-out forwards;
+  animation-delay: 4.25s; }
+
+.svg-logotype .finn-i-dot {
+  animation: show-i 0.1s linear forwards;
+  animation-delay: 5.6s; }
+
+@keyframes draw-crispin {
+  0% {
+    stroke-dashoffset: 810; }
+  100% {
+    stroke-dashoffset: 0; } }
+
+@keyframes draw-f {
+  0% {
+    stroke-dashoffset: 600; }
+  100% {
+    stroke-dashoffset: 300; } }
+
+@keyframes draw-inn {
+  0% {
+    stroke-dashoffset: 332; }
+  100% {
+    stroke-dashoffset: 0; } }
+
+@keyframes show-i {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }

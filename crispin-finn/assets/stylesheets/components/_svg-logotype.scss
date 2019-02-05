@@ -1,0 +1,80 @@
+.svg-logotype {
+
+  // $draw-delay: 0.8s;
+  // $draw-duration: 2.0s;
+  // $scaleup: 1;
+  // position: absolute;
+  // z-index: 999;
+
+  // .i-upstroke {
+  //   stroke: $black;
+  // }
+
+  // .f-downstroke {
+  //   stroke: $black;
+  // }
+
+  // .i-dot {
+  //   fill: $black;
+  // }
+
+  // &.is-animated {
+  //   .i-upstroke {
+  //     stroke-dasharray: 400;
+  //     stroke-dashoffset: 400;
+  //     animation: draw-i $draw-duration ease-in forwards;
+  //     animation-delay: $draw-delay;
+  //   }
+  //   .f-downstroke {
+  //     stroke-dasharray: 700;
+  //     stroke-dashoffset: 700;
+  //     animation: draw-f $draw-duration ease-out forwards;
+  //     animation-delay: $draw-delay;
+  //   }
+  //   .i-dot {
+  //     opacity: 0;
+  //     animation: show-i-dot $draw-duration linear forwards;
+  //     animation-delay: $draw-delay;
+  //   }
+  //}
+}
+
+
+@keyframes show-i-dot {
+  0% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes draw-i {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  30% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-f {
+  0% {
+    stroke-dashoffset: 700;
+  }
+  30% {
+    stroke-dashoffset: 700;
+  }
+  95% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
