@@ -1,0 +1,11 @@
+# Misc files
+# ---------------------------------------------------------------------
+.DS_Store
+/.env
+/.idea
+/vendor
+Thumbs.db
+.cache
+.codekit-cache
+config.codekit
+config.codekit3
