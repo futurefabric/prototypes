@@ -2,55 +2,12 @@
 <html lang="en">
   <head>
     <title>Building Composer</title>
-    <meta http-equiv="refresh" content="5" />
+    <!--<meta http-equiv="refresh" content="5" />-->
     <script language="javascript" type="text/javascript" src="assets/javascripts/two.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="assets/stylesheets/application.css"/>
   </head>
   <body>
-    <main class="main">
-      <div id="moving" 
-           style="
-           width: 600px; 
-           height: 600px; 
-           position: absolute; 
-           left: 50%; 
-           top: 50%; 
-           transform: translate(-50%,-50%); 
-           background-color: #ffffff;">
-      </div>
-      <script type="text/javascript">
-        var rendererType = "SVGRenderer";
-        var canvasWidth = 600;
-        var canvasHeight = 600;
-        var canvasColor = "#f07363";
-        var elem = document.getElementById('moving');
-        var params = {
-          width: canvasWidth,
-          height: canvasHeight,
-          type: rendererType
-        };
-        function getRandomInRange(min, max) {
-          return Math.random() * (max - min) + min;
-        }
-        two = new Two(params).appendTo(elem);
-      </script>
-      <script type="text/javascript">
-        // by Guy Moorhouse
-        // @futurefabric
-
-        var circle = two.makeCircle(getRandomInRange(100, 500), 100, 50);
-        circle.fill = '#f7cd53';
-        circle.linewidth = 2;
-
-        var rect = two.makeRectangle(getRandomInRange(201, 399), 400, 400, 300);
-        rect.fill = '#61b9aa';
-        rect.linewidth = 2;
-
-        var rect = two.makeRectangle(getRandomInRange(300, 500), 450, 100, 200);
-        rect.fill = '#c2dcd7';
-        rect.linewidth = 2;
-
-        two.update();
-      </script>
-    </main>
+    <div id="composer"></div>
+    <script language="javascript" type="text/javascript" src="assets/javascripts/application.js"></script>
   </body>
 </html>
