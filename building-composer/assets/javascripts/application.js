@@ -16,6 +16,7 @@ const TWO_PARAMS = {
   type: RENDERER_TYPE
 };
 const TWO = new Two(TWO_PARAMS).appendTo(COMPOSER);
+const DICE_ROLL = Math.round(getRandomNumberInRange(1, 6));
 
 // DRAWING VARIABLES
 let grid_columns = 12;
@@ -32,9 +33,18 @@ let pale_green = '#C2DCD7';
 let red = '#EE7E6F';
 let pink = '#F2AACD';
 
+
 // HELPERS
-function getRandomIntegerInRange(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
+function getRandomNumberInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function roundNumberToDecimalQuarter(number) {
+  return (Math.round(number * 4) / 4).toFixed(2);
+}
+
+function roundNumberToInteger(number) {
+  return Math.round(number);
 }
 
 // DRAWING:
@@ -46,7 +56,13 @@ background.opacity = 0.1;
 background.noStroke();
 
 // Sun
-let sun_x = getRandomIntegerInRange(2, 10) * grid_block_width;
+let sun_x;
+
+if (DICE_ROLL <= 3) {
+  sun_x = roundNumberToInteger(getRandomNumberInRange(2, 4)) * grid_block_width;
+}else{
+  sun_x = roundNumberToInteger(getRandomNumberInRange(8, 10)) * grid_block_width;
+}
 let sun_y = grid_block_height * 2;
 let sun_radius = grid_block_width;
 let sun = TWO.makeCircle(sun_x, sun_y, sun_radius);
@@ -54,7 +70,7 @@ sun.fill = yellow;
 sun.linewidth = stroke_weight;
 
 // Green Building
-let flat_building_a_x = getRandomIntegerInRange(3, 9) * grid_block_width;
+let flat_building_a_x = roundNumberToDecimalQuarter(getRandomNumberInRange(3, 9)) * grid_block_width;
 let flat_building_a_y = grid_block_height * 8.25;
 let flat_building_a_width = grid_block_width * 4;
 let flat_building_a_height = grid_block_width * 5.5;
@@ -63,7 +79,7 @@ flat_building_a.fill = dark_green;
 flat_building_a.linewidth = stroke_weight;
 
 // Pale Green Building
-let lowrise_building_x = getRandomIntegerInRange(3.125, 9) * grid_block_width;
+let lowrise_building_x = roundNumberToDecimalQuarter(getRandomNumberInRange(3.125, 9)) * grid_block_width;
 let lowrise_building_y = grid_block_height * 9.75;
 let lowrise_building_width = grid_block_width * 4.5;
 let lowrise_building_height = grid_block_width * 2.5;
