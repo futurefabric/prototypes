@@ -63,20 +63,12 @@ flat_building_a.fill = dark_green;
 flat_building_a.linewidth = stroke_weight;
 
 // Pale Green Building
-let lowrise_building_x = getRandomIntegerInRange(3, 9) * grid_block_width;
+let lowrise_building_x = getRandomIntegerInRange(3.125, 9) * grid_block_width;
 let lowrise_building_y = grid_block_height * 9.75;
 let lowrise_building_width = grid_block_width * 4.5;
 let lowrise_building_height = grid_block_width * 2.5;
 let lowrise_building = TWO.makeRectangle(lowrise_building_x, lowrise_building_y, lowrise_building_width, lowrise_building_height);
 lowrise_building.fill = pale_green;
 lowrise_building.linewidth = stroke_weight;
-
-// let rect = TWO.makeRectangle(getRandomIntegerInRange(201, 399), 400, 400, 300);
-// rect.fill = '#61b9aa';
-// rect.linewidth = stroke_weight;
-
-// let rect_two = TWO.makeRectangle(getRandomIntegerInRange(300, 500), 450, 100, 200);
-// rect_two.fill = '#c2dcd7';
-// rect_two.linewidth = stroke_weight;
 
 TWO.update();
