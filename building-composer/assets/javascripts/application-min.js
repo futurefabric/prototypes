@@ -115,3 +115,4 @@ door_way.fill = pink;
 door_way.linewidth = stroke_weight;
 
 TWO.update();
+

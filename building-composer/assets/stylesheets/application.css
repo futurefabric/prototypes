@@ -1,13 +1,1 @@
-#composer {
-  width: 960px; 
-  height: 960px; 
-  position: absolute; 
-  left: 50%; 
-  top: 50%; 
-  transform: translate(-50%,-50%); 
-  background-color: #ffffff;
-  background-image: url(../images/grid-as-reference.png);
-  background-size: 100% 100%;
-  background-position: top left;
-  border: 1px solid #ffe5e4;
-}
+#composer{width:960px;height:960px;position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);background-color:#ffffff;background-image:url(../images/grid-as-reference.png);background-size:100% 100%;background-position:top left;border:1px solid #ffe5e4}
