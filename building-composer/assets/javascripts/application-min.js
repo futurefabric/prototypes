@@ -1,5 +1,5 @@
 
-// Islamic Cityscape Composer
+// Islamic Skyline Composer
 // by Guy Moorhouse
 // @futurefabric
 
@@ -89,30 +89,70 @@ lowrise_building.fill = pale_green;
 lowrise_building.linewidth = stroke_weight;
 
 
-// Door with arch
-let arch_radius;
-let door_way_height;
+
+// BUILDING WITH ARCHED DOORWAY
+// ----------------------------
+let door_arch_x = CANVAS_CENTER_X;
+let door_arch_y = CANVAS_CENTER_Y;
+let door_arch_radius;
+let door_height;
+
+let building_with_door_x = CANVAS_CENTER_X;
+let building_with_door_y = CANVAS_CENTER_Y;
+let building_with_door_width;
+let building_with_door_height;
+
+let building_with_arched_doorway_translation_x = 0;
+let building_with_arched_doorway_translation_y = 0;
 
 if (DICE_ROLL <= 3) {
-  arch_radius = grid_block_width;
-  door_way_height = 3 * grid_block_width;
+  // large
+  door_arch_radius = grid_block_width;
+  door_height = 3 * grid_block_width;
+  building_with_door_width = door_arch_radius * 4;
+  building_with_door_height = door_height + 3 * grid_block_height;
 } else {
-  arch_radius = 0.5 * grid_block_width;
-  door_way_height = 1.5 * grid_block_width;
+  // small
+  door_arch_radius = 0.5 * grid_block_width;
+  door_height = grid_block_width;
+  building_with_door_width = door_arch_radius * 4;
+  building_with_door_height = door_height + grid_block_height;
+  building_with_arched_doorway_translation_y = grid_block_height * 2;
 }
 
-let arch = TWO.makeCircle(CANVAS_CENTER_X, CANVAS_CENTER_Y, arch_radius);
-arch.fill = pink;
-arch.linewidth = stroke_weight;
+// DO DRAWING
 
-let door_way = TWO.makePath(
-  CANVAS_CENTER_X - arch_radius, CANVAS_CENTER_Y, 
-  CANVAS_CENTER_X - arch_radius, CANVAS_CENTER_Y + door_way_height,
-  CANVAS_CENTER_X + arch_radius, CANVAS_CENTER_Y + door_way_height, 
-  CANVAS_CENTER_X + arch_radius, CANVAS_CENTER_Y, 
-  true)
-door_way.fill = pink;
-door_way.linewidth = stroke_weight;
+// Draw building behind door
+let building_with_door = TWO.makeRectangle(
+  building_with_door_x, building_with_door_y, building_with_door_width, building_with_door_height
+);
+building_with_door.fill = white;
+building_with_door.linewidth = stroke_weight;
+
+// Draw arch opening above door opening
+let door_arch = TWO.makeCircle(door_arch_x, door_arch_y, door_arch_radius);
+door_arch.fill = pink;
+door_arch.linewidth = stroke_weight;
+
+// Draw door opening
+let door = TWO.makePath(
+  CANVAS_CENTER_X - door_arch_radius, CANVAS_CENTER_Y, 
+  CANVAS_CENTER_X - door_arch_radius, CANVAS_CENTER_Y + door_height,
+  CANVAS_CENTER_X + door_arch_radius, CANVAS_CENTER_Y + door_height, 
+  CANVAS_CENTER_X + door_arch_radius, CANVAS_CENTER_Y, 
+  true
+);
+door.fill = pink;
+door.linewidth = stroke_weight;
+
+// Group elements and translate position for easier manipulation
+let building_with_arched_doorway = TWO.makeGroup(building_with_door, door_arch, door);
+building_with_arched_doorway.translation.set(building_with_arched_doorway_translation_x, building_with_arched_doorway_translation_y);
+
+
+// END BUILDING WITH ARCHED DOORWAY
+// ----------------------------
+
 
 TWO.update();
 
