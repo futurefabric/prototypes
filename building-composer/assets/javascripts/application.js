@@ -1,4 +1,3 @@
-
 // Islamic Skyline Composer
 // by Guy Moorhouse
 // @futurefabric
@@ -49,17 +48,23 @@ function roundNumberToInteger(number) {
 
 // DRAWING:
 
-// Background
+// BACKGROUND
+// ----------------------------
 let background = TWO.makeRectangle(CANVAS_CENTER_X, CANVAS_CENTER_Y, CANVAS_WIDTH, CANVAS_HEIGHT);
 background.fill = white;
 background.opacity = 0.1;
 background.noStroke();
 
-// Sun
+
+
+// SUN
+// ----------------------------
 let sun_x;
 if (DICE_ROLL <= 3) {
+  // left
   sun_x = roundNumberToInteger(getRandomNumberInRange(2, 4)) * grid_block_width;
 }else{
+  // right
   sun_x = roundNumberToInteger(getRandomNumberInRange(8, 10)) * grid_block_width;
 }
 let sun_y = grid_block_height * 2;
@@ -69,7 +74,9 @@ sun.fill = yellow;
 sun.linewidth = stroke_weight;
 
 
-// Green Building
+
+// GREEN BUILDING
+// ----------------------------
 let flat_building_a_x = roundNumberToDecimalQuarter(getRandomNumberInRange(3, 9)) * grid_block_width;
 let flat_building_a_y = grid_block_height * 8.25;
 let flat_building_a_width = grid_block_width * 4;
@@ -79,7 +86,48 @@ flat_building_a.fill = dark_green;
 flat_building_a.linewidth = stroke_weight;
 
 
-// Pale Green Building
+
+
+// BUILDING WITH DOME ROOF
+// ----------------------------
+
+let building_and_dome_roof_translation_x;
+let building_and_dome_roof_translation_y = -1.5 * grid_block_height;
+
+if (DICE_ROLL <= 3) {
+  // right
+  building_and_dome_roof_translation_x = 4 * grid_block_width;
+} else {
+  // left
+  building_and_dome_roof_translation_x = -4 * grid_block_width;
+}
+
+let dome_roof_x = CANVAS_CENTER_X;
+let dome_roof_y = CANVAS_CENTER_Y;
+let dome_roof_radius = grid_block_width;
+let dome_roof = TWO.makeCircle(dome_roof_x, dome_roof_y, dome_roof_radius);
+dome_roof.fill = white;
+dome_roof.linewidth = stroke_weight;
+
+let building_under_dome_roof_x = CANVAS_CENTER_X;
+let building_under_dome_roof_y = CANVAS_CENTER_Y + 3.25 * grid_block_height;
+let building_under_dome_roof_width = 2 * grid_block_width;
+let building_under_dome_roof_height = 6.5 * grid_block_height;
+
+let building_under_dome_roof = TWO.makeRectangle(
+  building_under_dome_roof_x, building_under_dome_roof_y, building_under_dome_roof_width, building_under_dome_roof_height
+);
+building_under_dome_roof.fill = yellow;
+building_under_dome_roof.linewidth = stroke_weight;
+
+let building_and_dome_roof = TWO.makeGroup(dome_roof, building_under_dome_roof);
+building_and_dome_roof.translation.set(building_and_dome_roof_translation_x, building_and_dome_roof_translation_y);
+
+
+
+
+// PALE GREEN BUILDING
+// ----------------------------
 let lowrise_building_x = roundNumberToDecimalQuarter(getRandomNumberInRange(3.125, 8.75)) * grid_block_width;
 let lowrise_building_y = grid_block_height * 9.75;
 let lowrise_building_width = grid_block_width * 4.5;
@@ -105,7 +153,8 @@ let building_with_door_height;
 
 let step_height = 0.125 * grid_block_height;
 let step_width;
-let step_count = 10;
+let steps_start_y;
+let step_count = 11;//roundNumberToInteger(getRandomNumberInRange(5, 11));
 
 let building_with_arched_doorway_translation_x = 0;
 let building_with_arched_doorway_translation_y = 0;
@@ -116,21 +165,21 @@ if (DICE_ROLL <= 3) {
   door_height = 2 * grid_block_width;
   building_with_door_width = door_arch_radius * 4;
   building_with_door_height = door_height + 2 * grid_block_height;
-  building_with_arched_doorway_translation_y = grid_block_height;
+  building_with_arched_doorway_translation_y = grid_block_height * 1.5;
   building_with_arched_doorway_translation_x = grid_block_height * 3;
   step_width = building_with_door_width;
+  steps_start_y = CANVAS_CENTER_Y + (building_with_door_height * 0.5) + (step_height * 0.5);
 } else {
   // small
   door_arch_radius = 0.5 * grid_block_width;
   door_height = grid_block_width;
   building_with_door_width = door_arch_radius * 4;
   building_with_door_height = door_height + grid_block_height;
-  building_with_arched_doorway_translation_y = grid_block_height * 2;
+  building_with_arched_doorway_translation_y = grid_block_height * 2.5;
   building_with_arched_doorway_translation_x = grid_block_height * -4;
   step_width = building_with_door_width;
+  steps_start_y = CANVAS_CENTER_Y + (building_with_door_height * 0.5) + (step_height * 0.5);
 }
-
-// DO DRAWING
 
 // Draw building behind door
 let building_with_door = TWO.makeRectangle(
@@ -159,7 +208,7 @@ door.linewidth = stroke_weight;
 let steps = TWO.makeGroup();
 for (let i = 0; i <= step_count; i++) {
   step = TWO.makeRectangle(
-    CANVAS_CENTER_X, CANVAS_CENTER_Y + (building_with_door_height * 0.5) + (step_height * 0.5) + (i * step_height), step_width, step_height
+    CANVAS_CENTER_X, steps_start_y + (i * step_height), step_width, step_height
   );
   step.fill = white;
   step.linewidth = stroke_weight;
@@ -170,7 +219,6 @@ for (let i = 0; i <= step_count; i++) {
 let building_with_arched_doorway = TWO.makeGroup(building_with_door, door_arch, door, steps);
 building_with_arched_doorway.translation.set(building_with_arched_doorway_translation_x, building_with_arched_doorway_translation_y);
 
-// END BUILDING WITH ARCHED DOORWAY
-// ----------------------------
+
 
 TWO.update();
