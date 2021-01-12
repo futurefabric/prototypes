@@ -95,6 +95,7 @@ lowrise_building.linewidth = stroke_weight;
 let door_arch_x = CANVAS_CENTER_X;
 let door_arch_y = CANVAS_CENTER_Y;
 let door_arch_radius;
+
 let door_height;
 
 let building_with_door_x = CANVAS_CENTER_X;
@@ -102,15 +103,22 @@ let building_with_door_y = CANVAS_CENTER_Y;
 let building_with_door_width;
 let building_with_door_height;
 
+let step_height = 0.125 * grid_block_height;
+let step_width;
+let step_count = 10;
+
 let building_with_arched_doorway_translation_x = 0;
 let building_with_arched_doorway_translation_y = 0;
 
 if (DICE_ROLL <= 3) {
   // large
   door_arch_radius = grid_block_width;
-  door_height = 3 * grid_block_width;
+  door_height = 2 * grid_block_width;
   building_with_door_width = door_arch_radius * 4;
-  building_with_door_height = door_height + 3 * grid_block_height;
+  building_with_door_height = door_height + 2 * grid_block_height;
+  building_with_arched_doorway_translation_y = grid_block_height;
+  building_with_arched_doorway_translation_x = grid_block_height * 3;
+  step_width = building_with_door_width;
 } else {
   // small
   door_arch_radius = 0.5 * grid_block_width;
@@ -118,6 +126,8 @@ if (DICE_ROLL <= 3) {
   building_with_door_width = door_arch_radius * 4;
   building_with_door_height = door_height + grid_block_height;
   building_with_arched_doorway_translation_y = grid_block_height * 2;
+  building_with_arched_doorway_translation_x = grid_block_height * -4;
+  step_width = building_with_door_width;
 }
 
 // DO DRAWING
@@ -145,13 +155,22 @@ let door = TWO.makePath(
 door.fill = pink;
 door.linewidth = stroke_weight;
 
-// Group elements and translate position for easier manipulation
-let building_with_arched_doorway = TWO.makeGroup(building_with_door, door_arch, door);
-building_with_arched_doorway.translation.set(building_with_arched_doorway_translation_x, building_with_arched_doorway_translation_y);
+// Steps
+let steps = TWO.makeGroup();
+for (let i = 0; i <= step_count; i++) {
+  step = TWO.makeRectangle(
+    CANVAS_CENTER_X, CANVAS_CENTER_Y + (building_with_door_height * 0.5) + (step_height * 0.5) + (i * step_height), step_width, step_height
+  );
+  step.fill = white;
+  step.linewidth = stroke_weight;
+  step.addTo(steps);
+}
 
+// Group elements and translate position for easier manipulation
+let building_with_arched_doorway = TWO.makeGroup(building_with_door, door_arch, door, steps);
+building_with_arched_doorway.translation.set(building_with_arched_doorway_translation_x, building_with_arched_doorway_translation_y);
 
 // END BUILDING WITH ARCHED DOORWAY
 // ----------------------------
-
 
 TWO.update();
